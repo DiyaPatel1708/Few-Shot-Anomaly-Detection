@@ -17,7 +17,7 @@ def pick_device(console):
     if not torch.cuda.is_available():
         console.print("[yellow]no CUDA GPU detected -- running on CPU[/yellow]")
         return "cpu"
-    choice = input("Run on Cuda(fast) or CPU? Choose cuda only if you have Nvidia's Discrete Graphics\n\t[cuda/CPU, default - CPU]: ").strip().lower()
+    choice = input("Run on Cuda(fast) or CPU? Choose cuda only if you have Nvidia's Discrete Graphics\n[cuda/CPU, default - CPU]: ").strip().lower()
     return "cuda" if choice.startswith("cuda") else "cpu"
 
 
