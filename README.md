@@ -1,4 +1,4 @@
-# Few-Shot Industrial Defect Inspection
+# Few-Shot Industrial Anomaly Detection
 
 A terminal tool that detects and localizes defects in product photos using
 only a handful of defect-free reference images. Built on **InCTRL**
