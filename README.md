@@ -18,7 +18,7 @@ with Few-shot Sample Prompts](https://openaccess.thecvf.com/content/CVPR2024/pap
 ## Pretrained checkpoint (required)
 
 Download `trained_on_visa.zip` from the official InCTRL release:
-https://drive.google.com/drive/folders/1McmfxF8_H0BeRvcJ_poGIB-ATQCDDEIa
+https://drive.google.com/drive/folders/1mqDC-GSpJEueERPkqP7u8ORLQUU0KdYt
 
 Unzip it, take the `4/checkpoint.pyth` file, and place it at:
 
