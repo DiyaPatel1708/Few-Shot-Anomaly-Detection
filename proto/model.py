@@ -2,7 +2,6 @@ import json
 import os
 import sys
 import torch
-
 import config
 
 sys.path.insert(0, os.path.abspath(config.REPO_ROOT))

@@ -1,5 +1,6 @@
 import glob
 import os
+import numpy as np
 import torch
 from PIL import Image
 from torchvision import transforms
@@ -8,10 +9,7 @@ import config
 
 IMG_EXTS = ("*.jpg", "*.jpeg", "*.png", "*.bmp")
 
-_transform = transforms.Compose([
-    transforms.Resize(size=config.IMAGE_SIZE, interpolation=transforms.InterpolationMode.BICUBIC),
-    transforms.CenterCrop(size=(config.IMAGE_SIZE, config.IMAGE_SIZE)),
-    transforms.Lambda(lambda im: im.convert("RGB")),
+_normalize = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(mean=(0.48145466, 0.4578275, 0.40821073), std=(0.26862954, 0.26130258, 0.27577711)),
 ])
@@ -24,8 +22,23 @@ def list_images(folder):
     return sorted(paths)
 
 
+def pad_to_square(im):
+    w, h = im.size
+    side = max(w, h)
+    arr = np.asarray(im)
+    fill = tuple(int(v) for v in np.median(np.concatenate([arr[0], arr[-1]], axis=0), axis=0))
+    canvas = Image.new("RGB", (side, side), fill)
+    canvas.paste(im, ((side - w) // 2, (side - h) // 2))
+    return canvas
+
+
+def prepare(im):
+    im = pad_to_square(im.convert("RGB")).resize((config.IMAGE_SIZE, config.IMAGE_SIZE), Image.BICUBIC)
+    return _normalize(im)
+
+
 def load_image(path, device):
-    return _transform(Image.open(path)).to(device)
+    return prepare(Image.open(path)).to(device)
 
 
 class Detector:
