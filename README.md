@@ -1,4 +1,4 @@
-# Few-Shot Industrial Anomally Detection
+# Few-Shot Industrial Anomaly Detection
 
 A terminal tool that checks product photos for defects using only 4 defect-free
 reference images. Built on **InCTRL** (Zhu & Pang, CVPR 2024): one pretrained model,
